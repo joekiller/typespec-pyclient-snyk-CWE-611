@@ -1,0 +1,9 @@
+certifi==2025.4.26
+charset-normalizer==3.4.2
+corehttp==1.0.0b6
+demoservice @ file:///Users/jl0918/src/github/joekiller/typespec-pyclient-snyk-CWE-611/clientpy
+idna==3.10
+isodate==0.7.2
+requests==2.32.3
+typing_extensions==4.13.2
+urllib3==2.4.0
