@@ -12,6 +12,7 @@ from ._models import (  # type: ignore
     Error,
     Widget,
     WidgetList,
+    WidgetMergePatchUpdate,
 )
 from ._patch import __all__ as _patch_all
 from ._patch import *
@@ -22,6 +23,7 @@ __all__ = [
     "Error",
     "Widget",
     "WidgetList",
+    "WidgetMergePatchUpdate",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])  # pyright: ignore
 _patch_sdk()

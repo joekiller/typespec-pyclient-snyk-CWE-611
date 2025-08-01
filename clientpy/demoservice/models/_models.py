@@ -1,7 +1,7 @@
 # coding=utf-8
 # pylint: disable=useless-super-delegation
 
-from typing import Any, List, Literal, Mapping, TYPE_CHECKING, overload
+from typing import Any, List, Literal, Mapping, Optional, TYPE_CHECKING, overload
 
 from .._utils.model_base import Model as _Model, rest_field
 
@@ -130,6 +130,42 @@ class WidgetList(_Model):
         self,
         *,
         items_property: List["_models.Widget"],
+    ) -> None: ...
+
+    @overload
+    def __init__(self, mapping: Mapping[str, Any]) -> None:
+        """
+        :param mapping: raw JSON to initialize the model.
+        :type mapping: Mapping[str, Any]
+        """
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+
+
+class WidgetMergePatchUpdate(_Model):
+    """WidgetMergePatchUpdate.
+
+    :ivar id:
+    :vartype id: str
+    :ivar weight:
+    :vartype weight: int
+    :ivar color: Is either a Literal["red"] type or a Literal["blue"] type.
+    :vartype color: str or str
+    """
+
+    id: Optional[str] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    weight: Optional[int] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    color: Optional[Literal["red", "blue"]] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    """Is either a Literal[\"red\"] type or a Literal[\"blue\"] type."""
+
+    @overload
+    def __init__(
+        self,
+        *,
+        id: Optional[str] = None,  # pylint: disable=redefined-builtin
+        weight: Optional[int] = None,
+        color: Optional[Literal["red", "blue"]] = None,
     ) -> None: ...
 
     @overload

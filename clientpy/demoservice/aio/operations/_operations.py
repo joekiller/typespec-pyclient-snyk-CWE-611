@@ -277,16 +277,21 @@ class WidgetsOperations:
 
     @overload
     async def update(
-        self, id: str, body: _models.Widget, *, content_type: str = "application/json", **kwargs: Any
+        self,
+        id: str,
+        body: _models.WidgetMergePatchUpdate,
+        *,
+        content_type: str = "application/merge-patch+json",
+        **kwargs: Any
     ) -> _models.Widget:
         """Update a widget.
 
         :param id: Required.
         :type id: str
         :param body: Required.
-        :type body: ~demoservice.models.Widget
+        :type body: ~demoservice.models.WidgetMergePatchUpdate
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
+         Default value is "application/merge-patch+json".
         :paramtype content_type: str
         :return: Widget. The Widget is compatible with MutableMapping
         :rtype: ~demoservice.models.Widget
@@ -295,7 +300,7 @@ class WidgetsOperations:
 
     @overload
     async def update(
-        self, id: str, body: JSON, *, content_type: str = "application/json", **kwargs: Any
+        self, id: str, body: JSON, *, content_type: str = "application/merge-patch+json", **kwargs: Any
     ) -> _models.Widget:
         """Update a widget.
 
@@ -304,7 +309,7 @@ class WidgetsOperations:
         :param body: Required.
         :type body: JSON
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
+         Default value is "application/merge-patch+json".
         :paramtype content_type: str
         :return: Widget. The Widget is compatible with MutableMapping
         :rtype: ~demoservice.models.Widget
@@ -313,7 +318,7 @@ class WidgetsOperations:
 
     @overload
     async def update(
-        self, id: str, body: IO[bytes], *, content_type: str = "application/json", **kwargs: Any
+        self, id: str, body: IO[bytes], *, content_type: str = "application/merge-patch+json", **kwargs: Any
     ) -> _models.Widget:
         """Update a widget.
 
@@ -322,20 +327,22 @@ class WidgetsOperations:
         :param body: Required.
         :type body: IO[bytes]
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
+         Default value is "application/merge-patch+json".
         :paramtype content_type: str
         :return: Widget. The Widget is compatible with MutableMapping
         :rtype: ~demoservice.models.Widget
         :raises ~corehttp.exceptions.HttpResponseError:
         """
 
-    async def update(self, id: str, body: Union[_models.Widget, JSON, IO[bytes]], **kwargs: Any) -> _models.Widget:
+    async def update(
+        self, id: str, body: Union[_models.WidgetMergePatchUpdate, JSON, IO[bytes]], **kwargs: Any
+    ) -> _models.Widget:
         """Update a widget.
 
         :param id: Required.
         :type id: str
-        :param body: Is one of the following types: Widget, JSON, IO[bytes] Required.
-        :type body: ~demoservice.models.Widget or JSON or IO[bytes]
+        :param body: Is one of the following types: WidgetMergePatchUpdate, JSON, IO[bytes] Required.
+        :type body: ~demoservice.models.WidgetMergePatchUpdate or JSON or IO[bytes]
         :return: Widget. The Widget is compatible with MutableMapping
         :rtype: ~demoservice.models.Widget
         :raises ~corehttp.exceptions.HttpResponseError:
@@ -354,7 +361,7 @@ class WidgetsOperations:
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.Widget] = kwargs.pop("cls", None)
 
-        content_type = content_type or "application/json"
+        content_type = content_type or "application/merge-patch+json"
         _content = None
         if isinstance(body, (IOBase, bytes)):
             _content = body
