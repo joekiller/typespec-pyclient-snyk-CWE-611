@@ -1198,7 +1198,7 @@ def _deserialize_xml(
     deserializer: typing.Any,
     value: str,
 ) -> typing.Any:
-    element = ET.fromstring(value)  # nosec
+    element = ET.fromstring(value, resolve_entities=False)
     return _deserialize(deserializer, element)
 
 
