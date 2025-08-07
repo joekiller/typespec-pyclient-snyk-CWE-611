@@ -15,6 +15,7 @@ import enum
 import email.utils
 from datetime import datetime, date, time, timedelta, timezone
 from json import JSONEncoder
+import xml.etree as etree
 import xml.etree.ElementTree as ET
 from collections.abc import MutableMapping
 from typing_extensions import Self
@@ -30,6 +31,9 @@ __all__ = ["SdkJSONEncoder", "Model", "rest_field", "rest_discriminator"]
 
 TZ_UTC = timezone.utc
 _T = typing.TypeVar("_T")
+
+parser = etree.XMLParser(resolve_entities=False)
+"""Avoid XML entity resolution to prevent XXE attacks. (https://github.com/microsoft/typespec/issues/8083)"""
 
 
 def _timedelta_as_isostr(td: timedelta) -> str:
@@ -1198,7 +1202,7 @@ def _deserialize_xml(
     deserializer: typing.Any,
     value: str,
 ) -> typing.Any:
-    element = ET.fromstring(value, resolve_entities=False)
+    element = etree.fromstring(value, parser=parser)
     return _deserialize(deserializer, element)
 
 
